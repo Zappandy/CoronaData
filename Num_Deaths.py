@@ -65,7 +65,7 @@ def numDeaths(n, keys_countries, date_cols):
     countries_deaths = {}
     for i, c in enumerate(indices):
         try:
-            if data_dict[c] != "nan":
+            if data_dict[c] != "nan":  # nan == no date of first local transmission in our CSV
                 print(f"{c} has {df_deathAgg.iloc[i][data_dict[c]]} deaths on {data_dict[c]}")
                 countries_deaths.setdefault(c, df_deathAgg.iloc[i][data_dict[c]])
         except KeyError as error:
@@ -84,7 +84,8 @@ def updated_CSV(updated_file, deaths):
 
     numDeaths_col = list(updated_file.head(0))[-2]
     country_col = list(updated_file.head(0))[1]
-    # issue https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+    # May rework parsing if the following issue arises:
+    # https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
     for n, row in enumerate(updated_file.index):
         try:
             print(updated_file[numDeaths_col][n])
