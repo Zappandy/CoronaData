@@ -28,7 +28,7 @@ def CSV_To_Dates(file):
             dayGroup = DatesRegex.search(str(date)).group(2)
             dayGroup = "0" + dayGroup if len(dayGroup) == 1 else dayGroup
             yearGroup = DatesRegex.search(str(date)).group(3)
-        except AttributeError:  # when the float value is found aka it means that our CSV does not have first day of local transmission
+        except AttributeError:  # when the float value is found i.e. it means that our CSV does not have first day of local transmission
             if type(date) is float:
                 date_cols.append(str(date))
                 continue
